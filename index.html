@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bayardulu.com - Transfer Uang Cepat & Aman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#1d4ed8',
+                            600: '#1e40af',
+                            700: '#1e3a8a',
+                            800: '#172554',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="h-full bg-slate-50 text-slate-800 flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="router.navigate('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand-700/20">
+                    B
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-slate-900">bayardulu<span class="text-brand-600">.com</span></span>
+                    <span class="block text-[10px] text-slate-500 font-medium tracking-wide uppercase">Solusi Transfer Kilat & Mudah</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-1">
+                <button onclick="router.navigate('home')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition" data-target="home">Beranda</button>
+                <button onclick="router.navigate('promo')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition flex items-center gap-1.5" data-target="promo">
+                    <i class="fa-solid fa-tags text-amber-500"></i> Promo
+                </button>
+                <button onclick="router.navigate('about')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition" data-target="about">Tentang Kami</button>
+            </nav>
+
+            <div class="hidden md:flex items-center space-x-3" id="auth-buttons-container">
+                <button onclick="router.navigate('login')" class="px-4 py-2 rounded-xl text-sm font-semibold text-brand-600 hover:bg-brand-50 transition">Masuk</button>
+                <button onclick="router.navigate('register')" class="px-4 py-2 rounded-xl text-sm font-semibold bg-brand-600 text-white hover:bg-brand-700 shadow-lg shadow-brand-600/20 transition">Daftar</button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-toggle" onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 animate-fade-in">
+            <button onclick="router.navigate('home'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-brand-50 hover:text-brand-600 flex items-center gap-3">
+                <i class="fa-solid fa-house w-5 text-brand-600"></i> Beranda
+            </button>
+            <button onclick="router.navigate('promo'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-brand-50 hover:text-brand-600 flex items-center gap-3">
+                <i class="fa-solid fa-tags w-5 text-amber-500"></i> Promo
+            </button>
+            <button onclick="router.navigate('about'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-brand-50 hover:text-brand-600 flex items-center gap-3">
+                <i class="fa-solid fa-circle-info w-5 text-blue-500"></i> Tentang Kami
+            </button>
+            <div class="pt-2 border-t border-slate-100 flex flex-col gap-2" id="mobile-auth-container">
+                <button onclick="router.navigate('login'); toggleMobileMenu();" class="w-full py-3 rounded-xl font-semibold text-center text-brand-600 bg-brand-50 hover:bg-brand-100 transition">Masuk</button>
+                <button onclick="router.navigate('register'); toggleMobileMenu();" class="w-full py-3 rounded-xl font-semibold text-center bg-brand-600 text-white hover:bg-brand-700 shadow-md shadow-brand-600/20 transition">Daftar Akun</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="flex-grow">
+        <!-- Dynamic Views -->
+    </main>
+
+    <footer class="bg-slate-900 text-slate-300 pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white font-black text-lg">
+                            B
+                        </div>
+                        <span class="text-xl font-extrabold tracking-tight text-white">bayardulu<span class="text-brand-500">.com</span></span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Solusi transfer uang terpercaya, cepat, dan mudah kapan saja.
+                    </p>
+                    <div class="pt-2 text-sm font-semibold text-white">
+                        PT Bayar Dulu Murah
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-white mb-4">Navigasi Utama</h3>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#" onclick="router.navigate('home'); return false;" class="text-slate-400 hover:text-white transition">Beranda</a></li>
+                        <li><a href="#" onclick="router.navigate('promo'); return false;" class="text-slate-400 hover:text-white transition">Promo Hari Ini</a></li>
+                        <li><a href="#" onclick="router.navigate('about'); return false;" class="text-slate-400 hover:text-white transition">Tentang Kami</a></li>
+                        <li><a href="#" onclick="router.navigate('register'); return false;" class="text-slate-400 hover:text-white transition">Daftar Akun Baru</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-white mb-4">Follow Us</h3>
+                    <div class="flex space-x-3 mb-6">
+                        <a href="https://instagram.com/askyrann_" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-brand-600 text-white flex items-center justify-center transition shadow-md"><i class="fa-brands fa-instagram text-lg"></i></a>
+                        <a href="https://wa.me/085797086378" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-brand-600 text-white flex items-center justify-center transition shadow-md"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+                        <a href="https://youtube.com/@askyyran?si=HhVkqkeQDUU8D-ER" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-brand-600 text-white flex items-center justify-center transition shadow-md"><i class="fa-brands fa-youtube text-lg"></i></a>
+                    </div>
+                    <p class="text-xs text-slate-400">Ikuti sosial media resmi kami untuk info promo harian & mingguan menarik!</p>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-white mb-4">Layanan Pelanggan</h3>
+                    <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/60 space-y-2">
+                        <div class="flex items-center gap-2 text-brand-400 font-semibold text-sm">
+                            <i class="fa-solid fa-headset"></i> Siap Melayani Anda
+                        </div>
+                        <p class="text-xs text-slate-300">Setiap hari dari jam:</p>
+                        <p class="text-sm font-bold text-white bg-slate-900 py-1.5 px-3 rounded-lg inline-block border border-slate-700">
+                            09.00 Pagi – 24.00 Malam
+                        </p>
+                        <p class="text-[11px] text-slate-400 pt-1">Fast response via Live Chat & WhatsApp CS Resmi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
+                &copy; 2026 PT Bayar Dulu Murah. Seluruh hak cipta dilindungi.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global Application State
+        const state = {
+            currentView: 'home',
+            currentUser: JSON.parse(localStorage.getItem('bayardulu_user')) || null,
+            selectedDestination: null,
+            selectedDenomination: null,
+            selectedPromoCode: null,
+            discountAmount: 0,
+            tempTransferData: null,
+            lastTransactionData: null
+        };
+
+        // Destinations Data with Exact User-Requested Imagess
+        const destinations = [
+            { id: 'shopee', name: 'Shopee Pay', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLB08JXY20CqkcTfsC9Astt-JCkTNvECS-48wAs-ILARNxee0ozPtOAmaN&s=10', color: 'from-orange-500 to-amber-500', desc: 'Transfer instan ke ShopeePay / Belanja Shopee' },
+            { id: 'gopay', name: 'GoPay', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVgX5P34OJuUrbSccnEkIsZZmaGGrN-r6ZBQl_ptm7KA&s=10', color: 'from-blue-500 to-cyan-500', desc: 'Isi saldo GoPay & Gojek praktis dan cepat' },
+            { id: 'dana', name: 'DANA', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlIcwZKTnzN5fp_KdhS_c6_qJL5uFFndIqmjAJJ0I-iw&s=10', color: 'from-blue-600 to-indigo-600', desc: 'Kirim saldo DANA kilat langsung masuk detik ini juga' },
+            { id: 'ovo', name: 'OVO', img: 'https://pbs.twimg.com/media/EUbePLEU0AIpder?format=webp&name=large', color: 'from-purple-600 to-violet-600', desc: 'Top up OVO Cash & OVO Points dengan mudah' },
+            { id: 'linkaja', name: 'LinkAja', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx7UqSSiUxg3lAGNqgjFXlcTo087mBdiJm_9sWS3ZXnQ&s=10', color: 'from-red-500 to-rose-600', desc: 'Pembayaran & transfer LinkAja aman dan cepat' }
+        ];
+
+        // Denominations (Rp 5.000 s.d Rp 500.000)
+        const denominations = [
+            { value: 5000, label: 'Rp 5.000', desc: 'Transfer Hemat' },
+            { value: 10000, label: 'Rp 10.000', desc: 'Favorit Harian' },
+            { value: 15000, label: 'Rp 15.000', desc: 'Cepat & Praktis' },
+            { value: 20000, label: 'Rp 20.000', desc: 'Pilihan Populer' },
+            { value: 25000, label: 'Rp 25.000', desc: 'Instan 24 Jam' },
+            { value: 50000, label: 'Rp 50.000', desc: 'Terlaris' },
+            { value: 75000, label: 'Rp 75.000', desc: 'Cepat Masuk' },
+            { value: 100000, label: 'Rp 100.000', desc: 'Bonus Promo' },
+            { value: 200000, label: 'Rp 200.000', desc: 'Transfer Besar' },
+            { value: 500000, label: 'Rp 500.000', desc: 'Maksimal Transaksi' }
+        ];
+
+        // Promos Data
+        const promos = [
+            { code: 'HEMAT5RB', title: 'Potongan Rp5.000', type: 'nominal', value: 5000, minTx: 20000, desc: 'Promo harian khusus transaksi minimal Rp20.000' },
+            { code: 'BEBASADMIN', title: 'Diskon 50% Biaya Admin', type: 'percent', value: 50, minTx: 50000, desc: 'Potongan spesial bulanan untuk semua tujuan transfer' },
+            { code: 'BULANBARU', title: 'Cashback Potongan Rp10.000', type: 'nominal', value: 10000, minTx: 100000, desc: 'Berlaku untuk transaksi di atas Rp100.000 tanpa batas kuota' },
+            { code: 'KILAT2026', title: 'Potongan Kilat Rp3.000', type: 'nominal', value: 3000, minTx: 10000, desc: 'Nikmati transfer super hemat setiap waktu' }
+        ];
+
+        // Router Implementation
+        const router = {
+            navigate: (viewName, param = null) => {
+                state.currentView = viewName;
+                if (param) {
+                    state.selectedDestination = param;
+                }
+                render();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                updateActiveNav();
+            }
+        };
+
+        function updateActiveNav() {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.getAttribute('data-target') === state.currentView) {
+                    btn.classList.add('bg-brand-50', 'text-brand-600');
+                } else {
+                    btn.classList.remove('bg-brand-50', 'text-brand-600');
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Notification Helper
+        function showNotification(title, message, type = 'success') {
+            const existing = document.getElementById('custom-notification');
+            if (existing) existing.remove();
+
+            const notif = document.createElement('div');
+            notif.id = 'custom-notification';
+            notif.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in';
+            
+            const iconClass = type === 'success' ? 'fa-circle-check text-emerald-500' : 'fa-circle-exclamation text-amber-500';
+            const bgBtn = type === 'success' ? 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/20' : 'bg-brand-600 hover:bg-brand-700 shadow-brand-600/20';
+
+            notif.innerHTML = `
+                <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 text-center space-y-4">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-slate-50 flex items-center justify-center text-3xl ${iconClass}">
+                        <i class="fa-solid ${iconClass}"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">${title}</h3>
+                        <p class="text-sm text-slate-600 mt-1 leading-relaxed">${message}</p>
+                    </div>
+                    <button onclick="document.getElementById('custom-notification').remove()" class="w-full py-3 rounded-xl font-semibold text-white ${bgBtn} shadow-lg transition">
+                        Mengerti / Tutup
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(notif);
+        }
+
+        // Render Engine
+        function render() {
+            const container = document.getElementById('main-content');
+            updateAuthHeaderUI();
+
+            switch(state.currentView) {
+                case 'home':
+                    container.innerHTML = renderHomeView();
+                    break;
+                case 'promo':
+                    container.innerHTML = renderPromoView();
+                    break;
+                case 'about':
+                    container.innerHTML = renderAboutView();
+                    break;
+                case 'login':
+                    container.innerHTML = renderLoginView();
+                    break;
+                case 'register':
+                    container.innerHTML = renderRegisterView();
+                    break;
+                case 'transfer':
+                    container.innerHTML = renderTransferView();
+                    break;
+                default:
+                    container.innerHTML = renderHomeView();
+            }
+        }
+
+        function updateAuthHeaderUI() {
+            const authDesktop = document.getElementById('auth-buttons-container');
+            const authMobile = document.getElementById('mobile-auth-container');
+
+            if (state.currentUser) {
+                const userHtml = `
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-2 bg-brand-50 px-3 py-1.5 rounded-xl border border-brand-100">
+                            <div class="w-7 h-7 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-xs">
+                                ${state.currentUser.name.charAt(0).toUpperCase()}
+                            </div>
+                            <span class="text-sm font-semibold text-slate-700 max-w-[120px] truncate">${state.currentUser.name}</span>
+                        </div>
+                        <button onclick="logout()" class="p-2 rounded-xl text-slate-400 hover:text-red-600 hover:bg-red-50 transition" title="Keluar">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
+                    </div>
+                `;
+                if (authDesktop) authDesktop.innerHTML = userHtml;
+                if (authMobile) authMobile.innerHTML = `
+                    <div class="p-3 bg-brand-50 rounded-xl mb-2 flex items-center justify-between">
+                        <span class="text-sm font-semibold text-brand-900">${state.currentUser.name}</span>
+                        <span class="text-xs bg-brand-200 text-brand-800 px-2 py-0.5 rounded-md font-medium">Aktif</span>
+                    </div>
+                    <button onclick="logout(); toggleMobileMenu();" class="w-full py-3 rounded-xl font-semibold text-center text-red-600 bg-red-50 hover:bg-red-100 transition">Keluar Akun</button>
+                `;
+            } else {
+                if (authDesktop) authDesktop.innerHTML = `
+                    <button onclick="router.navigate('login')" class="px-4 py-2 rounded-xl text-sm font-semibold text-brand-600 hover:bg-brand-50 transition">Masuk</button>
+                    <button onclick="router.navigate('register')" class="px-4 py-2 rounded-xl text-sm font-semibold bg-brand-600 text-white hover:bg-brand-700 shadow-lg shadow-brand-600/20 transition">Daftar</button>
+                `;
+                if (authMobile) authMobile.innerHTML = `
+                    <button onclick="router.navigate('login'); toggleMobileMenu();" class="w-full py-3 rounded-xl font-semibold text-center text-brand-600 bg-brand-50 hover:bg-brand-100 transition">Masuk</button>
+                    <button onclick="router.navigate('register'); toggleMobileMenu();" class="w-full py-3 rounded-xl font-semibold text-center bg-brand-600 text-white hover:bg-brand-700 shadow-md shadow-brand-600/20 transition">Daftar Akun</button>
+                `;
+            }
+        }
+
+        function logout() {
+            state.currentUser = null;
+            localStorage.removeItem('bayardulu_user');
+            showNotification('Berhasil Keluar', 'Anda telah keluar dari akun bayardulu.com.');
+            router.navigate('home');
+        }
+
+        function renderHomeView() {
+            return `
+                <div class="space-y-16 pb-20">
+                    <!-- Hero Section -->
+                    <section class="relative bg-gradient-to-b from-slate-950 via-slate-900 to-brand-900 text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                        <div class="max-w-5xl mx-auto text-center relative z-10 space-y-6">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-brand-200 text-xs font-semibold tracking-wide uppercase">
+                                <i class="fa-solid fa-shield-cat text-amber-400"></i> Aman • Cepat 24 Jam • Terpercaya
+                            </div>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+                                Transfer Uang <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Cepat & Aman</span> Kapan Saja
+                            </h1>
+                            <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                                <span class="font-bold text-white">bayardulu.com</span> hadir untuk membantu Anda transfer ke e-wallet & e-commerce dengan praktis, aman, dan tanpa hambatan.
+                            </p>
+                            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                                <a href="#destinations" onclick="document.getElementById('destinations').scrollIntoView({behavior: 'smooth'}); return false;" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-base shadow-xl shadow-brand-600/30 transition transform hover:-translate-y-0.5">
+                                    Mulai Transfer Sekarang <i class="fa-solid fa-arrow-right ml-2"></i>
+                                </a>
+                                <a href="#" onclick="router.navigate('promo'); return false;" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-base backdrop-blur-md border border-white/10 transition">
+                                    Lihat Promo Hari Ini <i class="fa-solid fa-tags ml-2 text-amber-400"></i>
+                                </a>
+                            </div>
+
+                            <div class="pt-10 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/10 max-w-4xl mx-auto text-left">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-600/20 flex items-center justify-center text-cyan-400"><i class="fa-solid fa-bolt text-lg"></i></div>
+                                    <div>
+                                        <div class="font-bold text-sm">Proses Kilat</div>
+                                        <div class="text-xs text-slate-400">Masuk dalam detik</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-600/20 flex items-center justify-center text-cyan-400"><i class="fa-solid fa-shield-halved text-lg"></i></div>
+                                    <div>
+                                        <div class="font-bold text-sm">Aman 100%</div>
+                                        <div class="text-xs text-slate-400">Sistem terverifikasi</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-600/20 flex items-center justify-center text-cyan-400"><i class="fa-solid fa-percent text-lg"></i></div>
+                                    <div>
+                                        <div class="font-bold text-sm">Banyak Promo</div>
+                                        <div class="text-xs text-slate-400">Potongan harga tiap hari</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-600/20 flex items-center justify-center text-cyan-400"><i class="fa-solid fa-headset text-lg"></i></div>
+                                    <div>
+                                        <div class="font-bold text-sm">CS Siaga</div>
+                                        <div class="text-xs text-slate-400">09.00 s.d 24.00 Malam</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Destinations Section -->
+                    <section id="destinations" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+                        <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+                            <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-100">Pilih Tujuan Transfer</span>
+                            <h2 class="text-3xl font-extrabold text-slate-900">Mau Transfer ke Mana Hari Ini?</h2>
+                            <p class="text-slate-600 text-sm">Pilih aplikasi tujuan Anda di bawah ini dan nikmati kemudahan transaksi.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${destinations.map(dest => `
+                            <div onclick="selectDestination('${dest.id}')" class="group bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl border border-slate-200/80 hover:border-brand-500 transition-all cursor-pointer flex flex-col justify-between transform hover:-translate-y-1">
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <div class="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center shadow-md overflow-hidden group-hover:scale-110 transition-transform p-1">
+                                            <img src="${dest.img}" alt="${dest.name}" class="w-full h-full object-contain rounded-xl">
+                                        </div>
+                                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-600 group-hover:bg-brand-50 group-hover:text-brand-600 transition">Pilih <i class="fa-solid fa-chevron-right ml-1"></i></span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition">${dest.name}</h3>
+                                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">${dest.desc}</p>
+                                    </div>
+                                </div>
+                                <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-end text-xs font-semibold text-slate-600">
+                                    <span class="text-emerald-600 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Siap Transfer</span>
+                                </div>
+                            </div>
+                        `).join('')}
+
+                        <!-- Custom/Other destination card -->
+                        <div onclick="selectDestination('lainnya')" class="group bg-gradient-to-br from-slate-900 to-brand-900 text-white rounded-3xl p-6 shadow-lg hover:shadow-2xl border border-slate-800 transition-all cursor-pointer flex flex-col justify-between transform hover:-translate-y-1">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+                                        <i class="fa-solid fa-building-columns"></i>
+                                    </div>
+                                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-white/10 text-white">Lainnya</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Bank & E-Wallet </h3>
+                                    <p class="text-xs text-slate-300 mt-1 leading-relaxed">Transfer ke BCA, Mandiri, BRI, BNI, dan merchant digital lainnya.</p>
+                                </div>
+                            </div>
+                            <div class="pt-6 mt-6 border-t border-white/10 flex items-center justify-end text-xs font-semibold text-slate-300">
+                                <span class="text-cyan-400 flex items-center gap-1">Pilih <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                    <!-- Promo Banner Section -->
+                    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+                            <div class="absolute -right-10 -bottom-10 opacity-15 text-9xl">
+                                <i class="fa-solid fa-tags"></i>
+                            </div>
+                            <div class="space-y-3 relative z-10 max-w-xl text-center md:text-left">
+                                <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm">Spesial Promo Hari Ini</span>
+                                <h2 class="text-2xl sm:text-3xl font-black">Gunakan Potongan Harga di Setiap Transaksi!</h2>
+                                <p class="text-sm text-white/90 leading-relaxed">Nikmati potongan nominal dan diskon biaya admin harian serta bulanan yang bisa langsung Anda pakai saat melakukan transfer uang.</p>
+                            </div>
+                            <button onclick="router.navigate('promo')" class="relative z-10 px-8 py-4 rounded-2xl bg-white text-orange-600 font-extrabold text-sm shadow-lg hover:bg-slate-100 transition whitespace-nowrap">
+                                Lihat Semua Kode Promo <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            `;
+        }
+
+        function selectDestination(destId) {
+            state.selectedDestination = destId;
+            router.navigate('transfer');
+        }
+
+        function renderPromoView() {
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+                    <div class="text-center max-w-2xl mx-auto space-y-3">
+                        <span class="text-amber-600 font-bold text-xs uppercase tracking-widest bg-amber-50 px-3.5 py-1.5 rounded-full border border-amber-100">Promo & Diskon</span>
+                        <h1 class="text-3xl sm:text-4xl font-black text-slate-900">Promo Bulanan & Harian</h1>
+                        <p class="text-slate-600 text-sm">Gunakan kode promo di bawah ini untuk mendapatkan potongan harga spesial saat melakukan transaksi transfer di bayardulu.com.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        ${promos.map(promo => `
+                            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between space-y-6 relative overflow-hidden group hover:border-amber-400 transition">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-full -z-0 group-hover:bg-amber-100 transition"></div>
+                                <div class="relative z-10 space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 font-bold text-xs"><i class="fa-solid fa-tag mr-1"></i> Promo Aktif</span>
+                                        <span class="text-xs font-semibold text-slate-500">Min. Transaksi: Rp ${promo.minTx.toLocaleString('id-ID')}</span>
+                                    </div>
+                                    <h3 class="text-2xl font-black text-slate-900">${promo.title}</h3>
+                                    <p class="text-sm text-slate-600">${promo.desc}</p>
+                                </div>
+                                <div class="relative z-10 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                    <div>
+                                        <span class="text-xs text-slate-400 block font-medium">Kode Promo:</span>
+                                        <span class="font-mono font-bold text-lg text-brand-600 tracking-wider">${promo.code}</span>
+                                    </div>
+                                    <button onclick="applyPromoCode('${promo.code}', ${promo.value})" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-brand-600 text-white font-bold text-xs shadow-md transition">
+                                        Pakai Promo <i class="fa-solid fa-arrow-right ml-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="bg-slate-900 rounded-3xl p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+                        <div class="space-y-2 text-center sm:text-left">
+                            <h3 class="text-xl font-bold">Sudah siap melakukan transfer?</h3>
+                            <p class="text-sm text-slate-400">Pilih aplikasi tujuan transfer Anda sekarang dan nikmati hematnya.</p>
+                        </div>
+                        <button onclick="router.navigate('home')" class="px-6 py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-700 font-bold text-sm text-white shadow-lg transition whitespace-nowrap">
+                            Mulai Transaksi <i class="fa-solid fa-wallet ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function applyPromoCode(code, value) {
+            state.selectedPromoCode = code;
+            state.discountAmount = value;
+            showNotification('Promo Berhasil Dipilih!', `Kode promo "${code}" telah aktif. Silakan lanjutkan ke halaman transfer untuk menikmati potongan harga.`);
+        }
+
+        function renderAboutView() {
+            return `
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+                    <div class="text-center space-y-3">
+                        <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-100">Tentang Kami</span>
+                        <h1 class="text-3xl sm:text-4xl font-black text-slate-900">PT Bayar Dulu Murah</h1>
+                        <p class="text-slate-600 text-sm max-w-2xl mx-auto">Solusi andalan bagi siapa saja yang ingin melakukan transfer uang secara cepat dan efisien.</p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-slate-200 space-y-8 leading-relaxed text-slate-700">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-extrabold text-slate-900 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i class="fa-solid fa-bullseye"></i></div>
+                                Misi Utama Kami
+                            </h3>
+                            <p>
+                                Di era digital saat ini, kecepatan dan kemudahan dalam bertransaksi keuangan adalah prioritas utama masyarakat.
+                            </p>
+                            <p>
+                                <strong class="text-slate-900">bayardulu.com</strong> didirikan oleh <strong class="text-slate-900">PT Bayar Dulu Murah</strong> untuk menyediakan layanan transfer uang ke Shopee, GoPay, Dana, OVO, LinkAja, dan berbagai tujuan lainnya secara cepat, aman, dan dapat diandalkan kapan saja.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-100">
+                            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+                                <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center font-bold"><i class="fa-solid fa-shield-halved"></i></div>
+                                <h4 class="font-bold text-slate-900 text-lg">Aman & Terpercaya</h4>
+                                <p class="text-xs text-slate-500">Transaksi Anda diproses langsung oleh tim profesional yang berpengalaman.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+                                <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center font-bold"><i class="fa-solid fa-clock"></i></div>
+                                <h4 class="font-bold text-slate-900 text-lg">Layanan 15 Jam</h4>
+                                <p class="text-xs text-slate-500">Layanan pelanggan siaga setiap hari dari jam 09.00 pagi hingga jam 24.00 malam.</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+                                <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center font-bold"><i class="fa-solid fa-tags"></i></div>
+                                <h4 class="font-bold text-slate-900 text-lg">Promo Setiap Hari</h4>
+                                <p class="text-xs text-slate-500">Nikmati potongan harga harian dan bulanan untuk setiap transaksi Anda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderRegisterView() {
+            return `
+                <div class="max-w-md mx-auto px-4 py-12">
+                    <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-200/80 space-y-6">
+                        <div class="text-center space-y-2">
+                            <div class="w-12 h-12 mx-auto rounded-2xl bg-brand-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-brand-600/20">
+                                B
+                            </div>
+                            <h1 class="text-2xl font-black text-slate-900">Daftar Akun Baru</h1>
+                            <p class="text-xs text-slate-500">Buat akun bayardulu.com dengan cepat</p>
+                        </div>
+
+                        <form id="register-form" onsubmit="handleRegister(event)" class="space-y-4">
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">Nama Lengkap</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-user"></i></span>
+                                    <input type="text" id="reg-name" required placeholder="Masukkan nama lengkap" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-sm outline-none transition">
+                                </div>
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">Email</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-envelope"></i></span>
+                                    <input type="email" id="reg-email" required placeholder="nama@email.com" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-sm outline-none transition">
+                                </div>
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">Kata Sandi</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="reg-pass" required placeholder="Minimal 6 karakter" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-sm outline-none transition">
+                                </div>
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">Konfirmasi Kata Sandi</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="reg-pass-confirm" required placeholder="Ulangi kata sandi" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-sm outline-none transition">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg shadow-brand-600/30 transition">
+                                Daftar Sekarang
+                            </button>
+                        </form>
+
+                        <div class="pt-4 border-t border-slate-100 text-center text-xs text-slate-500">
+                            Sudah punya akun? <a href="#" onclick="router.navigate('login'); return false;" class="font-bold text-brand-600 hover:underline">Masuk di sini</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const pass = document.getElementById('reg-pass').value;
+            const passConfirm = document.getElementById('reg-pass-confirm').value;
+
+            if (pass !== passConfirm) {
+                showNotification('Pendaftaran Gagal', 'Konfirmasi kata sandi tidak sesuai dengan kata sandi.', 'error');
+                return;
+            }
+
+            const newUser = { name, email, pass };
+            state.currentUser = newUser;
+            localStorage.setItem('bayardulu_user', JSON.stringify(newUser));
+            
+            showNotification('Pendaftaran Berhasil!', `Selamat datang, ${name}! Akun Anda telah aktif.`);
+            router.navigate('home');
+        }
+
+        function renderLoginView() {
+            return `
+                <div class="max-w-md mx-auto px-4 py-16">
+                    <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-200/80 space-y-6">
+                        <div class="text-center space-y-2">
+                            <div class="w-12 h-12 mx-auto rounded-2xl bg-brand-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-brand-600/20">
+                                B
+                            </div>
+                            <h1 class="text-2xl font-black text-slate-900">Masuk ke Akun</h1>
+                            <p class="text-xs text-slate-500">Masukkan nama lengkap atau email dan kata sandi Anda</p>
+                        </div>
+
+                        <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">Nama Lengkap atau Email</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-user"></i></span>
+                                    <input type="text" id="login-identifier" required placeholder="Nama lengkap atau email terdaftar" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-sm outline-none transition">
+                                </div>
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">Kata Sandi</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" id="login-pass" required placeholder="Kata sandi akun" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-sm outline-none transition">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg shadow-brand-600/30 transition">
+                                Masuk Sekarang
+                            </button>
+                        </form>
+
+                        <div class="pt-4 border-t border-slate-100 text-center text-xs text-slate-500">
+                            Belum punya akun? <a href="#" onclick="router.navigate('register'); return false;" class="font-bold text-brand-600 hover:underline">Daftar sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const identifier = document.getElementById('login-identifier').value;
+            const pass = document.getElementById('login-pass').value;
+
+            let user = state.currentUser;
+            if (!user) {
+                user = { name: identifier, email: identifier, pass: pass };
+            }
+
+            state.currentUser = user;
+            localStorage.setItem('bayardulu_user', JSON.stringify(user));
+
+            showNotification('Berhasil Masuk', `Selamat datang kembali, ${user.name}!`);
+            router.navigate('home');
+        }
+
+        function renderTransferView() {
+            const destObj = destinations.find(d => d.id === state.selectedDestination) || { name: 'E-Wallet / Bank Lainnya', id: 'lainnya' };
+
+            return `
+                <div class="max-w-3xl mx-auto px-4 py-12 space-y-8">
+                    <div class="flex items-center gap-4">
+                        <button onclick="router.navigate('home')" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition shadow-sm">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <div>
+                            <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Formulir Transfer</span>
+                            <h1 class="text-2xl font-black text-slate-900">Transfer ke ${destObj.name}</h1>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200/80 space-y-6">
+                        <form id="transfer-form" onsubmit="handleTransferSubmit(event)" class="space-y-6">
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">Nomor Tujuan / No. Handphone / Rekening</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-phone"></i></span>
+                                    <input type="text" id="tx-destination-number" required placeholder="Contoh: 081234567890" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-sm outline-none transition">
+                                </div>
+                            </div>
+
+                            <!-- Pilih Nominal (Rp 5.000 s.d Rp 500.000) -->
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">Pilih Nominal Transaksi</label>
+                                    <span class="text-xs font-semibold text-brand-600">Rp 5.000 s.d Rp 500.000</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5" id="denomination-grid">
+                                    ${denominations.map(d => `
+                                        <div onclick="selectDenomination(${d.value})" id="denom-card-${d.value}" class="denom-item p-4 rounded-2xl border-2 border-slate-200 bg-white hover:border-brand-600 cursor-pointer transition-all flex flex-col justify-between space-y-2 shadow-sm">
+                                            <div class="flex items-center justify-between">
+                                                <div class="w-8 h-8 rounded-lg overflow-hidden border border-slate-100 p-0.5">
+                                                    <img src="${destObj.img || 'https://tokonindy.com/cdn/uploads/120211230174557.png'}" alt="${destObj.name}" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/40x40/1d4ed8/ffffff?text=Pay'">
+                                                </div>
+                                                <div class="radio-indicator w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center">
+                                                    <div class="inner-dot w-2.5 h-2.5 rounded-full bg-brand-600 hidden"></div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="text-brand-600 font-black text-lg block">${d.label}</span>
+                                                <span class="text-[11px] text-slate-400">${d.desc}</span>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Promo Section in Transfer -->
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold text-slate-700 uppercase"><i class="fa-solid fa-tags text-amber-500 mr-1.5"></i> Kode Promo Potongan Harga</span>
+                                    <a href="#" onclick="router.navigate('promo'); return false;" class="text-xs font-bold text-brand-600 hover:underline">Lihat Promo</a>
+                                </div>
+                                <div class="flex gap-2">
+                                    <input type="text" id="tx-promo-input" value="${state.selectedPromoCode || ''}" placeholder="Masukkan kode promo" class="flex-grow px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-mono uppercase font-bold outline-none">
+                                    <button type="button" onclick="applyPromoInput()" class="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-brand-600 transition">Gunakan</button>
+                                </div>
+                                <div id="promo-status-text" class="text-xs text-emerald-600 font-semibold">
+                                    ${state.selectedPromoCode ? `✓ Promo ${state.selectedPromoCode} aktif (Potongan: Rp ${state.discountAmount.toLocaleString('id-ID')})` : ''}
+                                </div>
+                            </div>
+
+                            <!-- Summary Card -->
+                            <div class="p-5 rounded-2xl bg-slate-900 text-white space-y-3">
+                                <div class="flex justify-between text-xs text-slate-400">
+                                    <span>Nominal Dipilih</span>
+                                    <span id="summary-nominal" class="text-white font-bold">Rp 0</span>
+                                </div>
+                                <div class="flex justify-between text-xs text-slate-400">
+                                    <span>Biaya Admin</span>
+                                    <span class="text-white font-bold">Rp 2.500</span>
+                                </div>
+                                <div class="flex justify-between text-xs text-slate-400">
+                                    <span>Potongan Promo</span>
+                                    <span id="summary-discount" class="text-amber-400 font-bold">- Rp 0</span>
+                                </div>
+                                <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-sm font-bold">
+                                    <span>Total Pembayaran</span>
+                                    <span id="summary-total" class="text-xl text-cyan-400">Rp 0</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-base shadow-xl shadow-brand-600/30 transition transform hover:-translate-y-0.5">
+                                Lanjut ke Pembayaran & Konfirmasi
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectDenomination(val) {
+            state.selectedDenomination = val;
+            
+            document.querySelectorAll('.denom-item').forEach(card => {
+                card.classList.remove('border-brand-600', 'bg-brand-50/50', 'ring-2', 'ring-brand-500/20');
+                card.classList.add('border-slate-200', 'bg-white');
+                const dot = card.querySelector('.inner-dot');
+                if (dot) dot.classList.add('hidden');
+            });
+
+            const activeCard = document.getElementById(`denom-card-${val}`);
+            if (activeCard) {
+                activeCard.classList.remove('border-slate-200', 'bg-white');
+                activeCard.classList.add('border-brand-600', 'bg-brand-50/50', 'ring-2', 'ring-brand-500/20');
+                const activeDot = activeCard.querySelector('.inner-dot');
+                if (activeDot) activeDot.classList.remove('hidden');
+            }
+
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            const val = state.selectedDenomination || 0;
+            const summaryNominal = document.getElementById('summary-nominal');
+            const summaryDiscount = document.getElementById('summary-discount');
+            const summaryTotal = document.getElementById('summary-total');
+
+            if (!summaryNominal) return;
+
+            const admin = val > 0 ? 2500 : 0;
+            const discount = state.discountAmount || 0;
+            const total = Math.max(0, val + admin - discount);
+
+            summaryNominal.innerText = 'Rp ' + val.toLocaleString('id-ID');
+            summaryDiscount.innerText = '- Rp ' + discount.toLocaleString('id-ID');
+            summaryTotal.innerText = 'Rp ' + total.toLocaleString('id-ID');
+        }
+
+        function applyPromoInput() {
+            const codeInput = document.getElementById('tx-promo-input').value.trim().toUpperCase();
+            const found = promos.find(p => p.code === codeInput);
+            const statusDiv = document.getElementById('promo-status-text');
+
+            if (found) {
+                state.selectedPromoCode = found.code;
+                state.discountAmount = found.value;
+                statusDiv.innerText = `✓ Promo ${found.code} aktif (Potongan: Rp ${found.value.toLocaleString('id-ID')})`;
+                statusDiv.className = 'text-xs text-emerald-600 font-semibold';
+                calculateTotal();
+            } else {
+                state.selectedPromoCode = null;
+                state.discountAmount = 0;
+                statusDiv.innerText = 'Kode promo tidak valid atau kadaluarsa.';
+                statusDiv.className = 'text-xs text-red-600 font-semibold';
+                calculateTotal();
+            }
+        }
+
+        function handleTransferSubmit(e) {
+            e.preventDefault();
+            const number = document.getElementById('tx-destination-number').value;
+            const amount = state.selectedDenomination;
+
+            if (!amount || amount < 5000) {
+                showNotification('Pilih Nominal', 'Silakan pilih salah satu nominal transfer terlebih dahulu.', 'error');
+                return;
+            }
+
+            const admin = 2500;
+            const total = Math.max(0, amount + admin - (state.discountAmount || 0));
+
+            state.tempTransferData = {
+                number,
+                amount,
+                total,
+                destination: state.selectedDestination
+            };
+
+            showReceiverNameModal();
+        }
+
+        function showReceiverNameModal() {
+            const data = state.tempTransferData;
+            const existing = document.getElementById('receiver-modal');
+            if (existing) existing.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'receiver-modal';
+            modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm animate-fade-in';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100 space-y-6">
+                    <div class="text-center space-y-2">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-2xl font-bold shadow-sm">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-900">Konfirmasi Nama Penerima</h3>
+                        <p class="text-xs text-slate-500">Masukkan nama penerima akhir untuk menyelesaikan transaksi.</p>
+                    </div>
+
+                    <form onsubmit="handleFinalPayment(event)" class="space-y-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide">Nama Penerima (Sesuai Akun)</label>
+                            <input type="text" id="final-receiver-name" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 text-sm outline-none transition">
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl text-xs space-y-1 border border-slate-200/60">
+                            <div class="flex justify-between"><span class="text-slate-500">Nomor Tujuan:</span> <span class="font-bold font-mono text-slate-900">${data.number}</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">Nominal:</span> <span class="font-bold text-slate-900">Rp ${data.amount.toLocaleString('id-ID')}</span></div>
+                            <div class="flex justify-between font-bold pt-1 border-t border-slate-200"><span class="text-slate-700">Total Bayar:</span> <span class="text-brand-600">Rp ${data.total.toLocaleString('id-ID')}</span></div>
+                        </div>
+
+                        <div class="flex gap-3 pt-2">
+                            <button type="button" onclick="document.getElementById('receiver-modal').remove()" class="w-1/2 py-3 rounded-xl font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition text-sm">Batal</button>
+                            <button type="submit" class="w-1/2 py-3 rounded-xl font-bold text-white bg-brand-600 hover:bg-brand-700 shadow-lg shadow-brand-600/20 transition text-sm">Bayar Sekarang</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function handleFinalPayment(e) {
+            e.preventDefault();
+            const receiverName = document.getElementById('final-receiver-name').value;
+            const existingModal = document.getElementById('receiver-modal');
+            if (existingModal) existingModal.remove();
+
+            state.lastTransactionData = {
+                ...state.tempTransferData,
+                name: receiverName,
+                date: new Date().toLocaleString('id-ID')
+            };
+
+            showTransferSuccessModal();
+        }
+
+        function showTransferSuccessModal() {
+            const data = state.lastTransactionData;
+            const existing = document.getElementById('success-modal');
+            if (existing) existing.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'success-modal';
+            modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm animate-fade-in';
+            
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl border border-slate-100 space-y-6">
+                    <div class="text-center space-y-3">
+                        <div class="w-20 h-20 mx-auto rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-4xl shadow-inner">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-slate-900">Transfer Berhasil Diproses!</h3>
+                        <p class="text-xs text-slate-500">Transaksi Anda sedang diteruskan ke tujuan dengan aman dan cepat.</p>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl p-4 space-y-2.5 text-xs border border-slate-100">
+                        <div class="flex justify-between py-1 border-b border-slate-200/60">
+                            <span class="text-slate-500 font-medium">Tujuan:</span>
+                            <span class="font-bold text-slate-900 uppercase">${data.destination}</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-slate-200/60">
+                            <span class="text-slate-500 font-medium">No. Tujuan / Rekening:</span>
+                            <span class="font-bold text-slate-900 font-mono">${data.number}</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-slate-200/60">
+                            <span class="text-slate-500 font-medium">Nama Penerima:</span>
+                            <span class="font-bold text-slate-900">${data.name}</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-slate-200/60">
+                            <span class="text-slate-500 font-medium">Nominal Transfer:</span>
+                            <span class="font-bold text-slate-900">Rp ${data.amount.toLocaleString('id-ID')}</span>
+                        </div>
+                        <div class="flex justify-between py-1 font-bold text-sm pt-1">
+                            <span class="text-slate-700">Total Dibayar:</span>
+                            <span class="text-brand-600">Rp ${data.total.toLocaleString('id-ID')}</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button onclick="document.getElementById('success-modal').remove(); router.navigate('home');" class="w-full py-3.5 rounded-xl font-semibold text-white bg-brand-600 hover:bg-brand-700 shadow-lg shadow-brand-600/20 transition">
+                            Kembali ke Beranda
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        window.onload = function() {
+            render();
+        };
+    </script>
+</body>
+</html>
